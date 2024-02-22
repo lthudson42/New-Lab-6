@@ -1,8 +1,27 @@
+/*
+Liam Hudson
+COP3502
+2/22/24
+*/
 #include <stdio.h>
+#include <stdlib.h>
 
+// low and high hold indices
+// this function performs a binary search on an array of integers in increasing size to find the index of a search value
 int search(int numbers[], int low, int high, int value) 
 {
-	return -1;
+    if(low < high){ // if the lowest index if less than the highest index
+        int middle = (low + high) / 2; // this variable stores the index of the middle value
+        if(value > numbers[middle]){ // condition if the search value if greater than the middle value
+            return search(numbers, middle+1, high, value); // recursive iteration that calls the function with a new low index
+        }
+        else if(value < numbers[middle]){
+            return search(numbers, low, middle-1, value); // recursive iteration that calls the function with a new high index
+        }
+        else if(numbers[middle] == value) // if the value is found, return the index
+            return middle;
+    } // first if statement
+    return -1; // if the value is not found in the array
 }
 
 void printArray(int numbers[], int sz)
